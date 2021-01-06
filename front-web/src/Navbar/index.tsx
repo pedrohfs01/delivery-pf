@@ -5,7 +5,7 @@ function Navbar(){
     return(
         <nav className="main-navbar">
             <Logo></Logo>
-            <a href="#" className="logo-text">Delivery PF</a>
+            <a href="home" className="logo-text">Delivery PF</a>
         </nav>
 
     );
