@@ -7,6 +7,7 @@ import com.pedrofernandes.deliverypf.entities.dto.ProductDTO;
 import com.pedrofernandes.deliverypf.entities.enums.OrderStatus;
 import com.pedrofernandes.deliverypf.repositories.OrderRepository;
 import com.pedrofernandes.deliverypf.repositories.ProductRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,14 @@ public class OrderService {
             Product product = productRepository.getOne(p.getId());
             order.getProducts().add(product);
         }
+        order = repo.save(order);
+        return new OrderDTO(order);
+    }
+
+    @Transactional
+    public OrderDTO setDelivered(Long id){
+        Order order = repo.getOne(id);
+        order.setStatus(OrderStatus.DELIVERED);
         order = repo.save(order);
         return new OrderDTO(order);
     }
